@@ -1,0 +1,7 @@
+C:\Users\luca\Documents\GitHub\DE2Sim\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DE2BotSim.csprojResolveAssemblyReference.cache
+C:\Users\luca\Documents\GitHub\DE2Sim\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DE2BotSim.csproj.GenerateResource.Cache
+C:\Users\luca\Documents\GitHub\DE2Sim\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\DE2Sim.exe.config
+C:\Users\luca\Documents\GitHub\DE2Sim\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\DE2Sim.exe
+C:\Users\luca\Documents\GitHub\DE2Sim\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DE2Sim.exe
+C:\Users\luca\Documents\GitHub\DE2Sim\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DE2Sim.Form1.resources
+C:\Users\luca\Documents\GitHub\DE2Sim\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DE2Sim.Properties.Resources.resources
