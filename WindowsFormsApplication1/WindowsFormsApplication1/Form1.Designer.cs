@@ -121,6 +121,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openMIFFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simulateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stepToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -158,7 +159,18 @@
             this.inttimer = new System.Windows.Forms.Timer(this.components);
             this.startbutton = new System.Windows.Forms.Button();
             this.stopbutton = new System.Windows.Forms.Button();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Hzbox = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.decbox = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.pb3box = new System.Windows.Forms.CheckBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.pb2box = new System.Windows.Forms.CheckBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.pb1box = new System.Windows.Forms.CheckBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.pb0box = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.led16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.led17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sw16)).BeginInit();
@@ -253,7 +265,7 @@
             // xled0
             // 
             this.xled0.Image = global::DE2Sim.Properties.Resources.xled_off;
-            this.xled0.Location = new System.Drawing.Point(721, 511);
+            this.xled0.Location = new System.Drawing.Point(789, 510);
             this.xled0.Name = "xled0";
             this.xled0.Size = new System.Drawing.Size(21, 24);
             this.xled0.TabIndex = 43;
@@ -262,7 +274,7 @@
             // xled1
             // 
             this.xled1.Image = global::DE2Sim.Properties.Resources.xled_off;
-            this.xled1.Location = new System.Drawing.Point(694, 511);
+            this.xled1.Location = new System.Drawing.Point(762, 510);
             this.xled1.Name = "xled1";
             this.xled1.Size = new System.Drawing.Size(21, 24);
             this.xled1.TabIndex = 42;
@@ -271,7 +283,7 @@
             // xled2
             // 
             this.xled2.Image = global::DE2Sim.Properties.Resources.xled_off;
-            this.xled2.Location = new System.Drawing.Point(667, 511);
+            this.xled2.Location = new System.Drawing.Point(713, 511);
             this.xled2.Name = "xled2";
             this.xled2.Size = new System.Drawing.Size(21, 24);
             this.xled2.TabIndex = 41;
@@ -280,7 +292,7 @@
             // xled3
             // 
             this.xled3.Image = global::DE2Sim.Properties.Resources.xled_off;
-            this.xled3.Location = new System.Drawing.Point(640, 511);
+            this.xled3.Location = new System.Drawing.Point(686, 511);
             this.xled3.Name = "xled3";
             this.xled3.Size = new System.Drawing.Size(21, 24);
             this.xled3.TabIndex = 40;
@@ -289,7 +301,7 @@
             // xled4
             // 
             this.xled4.Image = global::DE2Sim.Properties.Resources.xled_off;
-            this.xled4.Location = new System.Drawing.Point(613, 511);
+            this.xled4.Location = new System.Drawing.Point(637, 511);
             this.xled4.Name = "xled4";
             this.xled4.Size = new System.Drawing.Size(21, 24);
             this.xled4.TabIndex = 39;
@@ -298,7 +310,7 @@
             // xled5
             // 
             this.xled5.Image = global::DE2Sim.Properties.Resources.xled_off;
-            this.xled5.Location = new System.Drawing.Point(586, 511);
+            this.xled5.Location = new System.Drawing.Point(610, 511);
             this.xled5.Name = "xled5";
             this.xled5.Size = new System.Drawing.Size(21, 24);
             this.xled5.TabIndex = 38;
@@ -325,7 +337,7 @@
             // pb0
             // 
             this.pb0.Image = global::DE2Sim.Properties.Resources.pb_up;
-            this.pb0.Location = new System.Drawing.Point(694, 542);
+            this.pb0.Location = new System.Drawing.Point(762, 541);
             this.pb0.Name = "pb0";
             this.pb0.Size = new System.Drawing.Size(37, 37);
             this.pb0.TabIndex = 35;
@@ -336,7 +348,7 @@
             // pb1
             // 
             this.pb1.Image = global::DE2Sim.Properties.Resources.pb_up;
-            this.pb1.Location = new System.Drawing.Point(640, 541);
+            this.pb1.Location = new System.Drawing.Point(686, 541);
             this.pb1.Name = "pb1";
             this.pb1.Size = new System.Drawing.Size(37, 37);
             this.pb1.TabIndex = 34;
@@ -347,7 +359,7 @@
             // pb2
             // 
             this.pb2.Image = global::DE2Sim.Properties.Resources.pb_up;
-            this.pb2.Location = new System.Drawing.Point(586, 542);
+            this.pb2.Location = new System.Drawing.Point(610, 541);
             this.pb2.Name = "pb2";
             this.pb2.Size = new System.Drawing.Size(37, 37);
             this.pb2.TabIndex = 33;
@@ -761,7 +773,7 @@
             this.valspanel.Controls.Add(this.PCbox);
             this.valspanel.Location = new System.Drawing.Point(789, 51);
             this.valspanel.Name = "valspanel";
-            this.valspanel.Size = new System.Drawing.Size(200, 527);
+            this.valspanel.Size = new System.Drawing.Size(200, 442);
             this.valspanel.TabIndex = 54;
             // 
             // label31
@@ -1094,9 +1106,16 @@
             // openMIFFileToolStripMenuItem
             // 
             this.openMIFFileToolStripMenuItem.Name = "openMIFFileToolStripMenuItem";
-            this.openMIFFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMIFFileToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.openMIFFileToolStripMenuItem.Text = "Open MIF File";
             this.openMIFFileToolStripMenuItem.Click += new System.EventHandler(this.openMIFFileToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // simulateToolStripMenuItem
             // 
@@ -1114,14 +1133,14 @@
             // stepToolStripMenuItem
             // 
             this.stepToolStripMenuItem.Name = "stepToolStripMenuItem";
-            this.stepToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.stepToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.stepToolStripMenuItem.Text = "Step";
             this.stepToolStripMenuItem.Click += new System.EventHandler(this.stepToolStripMenuItem_Click);
             // 
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
@@ -1129,7 +1148,7 @@
             // 
             this.stopToolStripMenuItem.Enabled = false;
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
@@ -1141,7 +1160,7 @@
             this.hzToolStripMenuItem2,
             this.kHzToolStripMenuItem});
             this.simSpeedToolStripMenuItem.Name = "simSpeedToolStripMenuItem";
-            this.simSpeedToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.simSpeedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.simSpeedToolStripMenuItem.Text = "Sim Speed...";
             // 
             // hzToolStripMenuItem
@@ -1175,7 +1194,7 @@
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
@@ -1280,7 +1299,7 @@
             this.dist7box.Name = "dist7box";
             this.dist7box.Size = new System.Drawing.Size(33, 20);
             this.dist7box.TabIndex = 69;
-            this.dist7box.Text = "0";
+            this.dist7box.Text = "7FFF";
             this.dist7box.TextChanged += new System.EventHandler(this.dist7box_TextChanged);
             // 
             // dist6box
@@ -1289,7 +1308,7 @@
             this.dist6box.Name = "dist6box";
             this.dist6box.Size = new System.Drawing.Size(33, 20);
             this.dist6box.TabIndex = 68;
-            this.dist6box.Text = "0";
+            this.dist6box.Text = "7FFF";
             this.dist6box.TextChanged += new System.EventHandler(this.dist6box_TextChanged);
             // 
             // dist5box
@@ -1298,7 +1317,7 @@
             this.dist5box.Name = "dist5box";
             this.dist5box.Size = new System.Drawing.Size(33, 20);
             this.dist5box.TabIndex = 67;
-            this.dist5box.Text = "0";
+            this.dist5box.Text = "7FFF";
             this.dist5box.TextChanged += new System.EventHandler(this.dist5box_TextChanged);
             // 
             // dist4box
@@ -1307,7 +1326,7 @@
             this.dist4box.Name = "dist4box";
             this.dist4box.Size = new System.Drawing.Size(33, 20);
             this.dist4box.TabIndex = 66;
-            this.dist4box.Text = "0";
+            this.dist4box.Text = "7FFF";
             this.dist4box.TextChanged += new System.EventHandler(this.dist4box_TextChanged);
             // 
             // dist3box
@@ -1316,7 +1335,7 @@
             this.dist3box.Name = "dist3box";
             this.dist3box.Size = new System.Drawing.Size(33, 20);
             this.dist3box.TabIndex = 65;
-            this.dist3box.Text = "0";
+            this.dist3box.Text = "7FFF";
             this.dist3box.TextChanged += new System.EventHandler(this.dist3box_TextChanged);
             // 
             // dist2box
@@ -1325,7 +1344,7 @@
             this.dist2box.Name = "dist2box";
             this.dist2box.Size = new System.Drawing.Size(33, 20);
             this.dist2box.TabIndex = 64;
-            this.dist2box.Text = "0";
+            this.dist2box.Text = "7FFF";
             this.dist2box.TextChanged += new System.EventHandler(this.dist2box_TextChanged);
             // 
             // dist1box
@@ -1334,7 +1353,7 @@
             this.dist1box.Name = "dist1box";
             this.dist1box.Size = new System.Drawing.Size(33, 20);
             this.dist1box.TabIndex = 63;
-            this.dist1box.Text = "0";
+            this.dist1box.Text = "7FFF";
             this.dist1box.TextChanged += new System.EventHandler(this.dist1box_TextChanged);
             // 
             // dist0box
@@ -1343,7 +1362,7 @@
             this.dist0box.Name = "dist0box";
             this.dist0box.Size = new System.Drawing.Size(33, 20);
             this.dist0box.TabIndex = 62;
-            this.dist0box.Text = "0";
+            this.dist0box.Text = "7FFF";
             this.dist0box.TextChanged += new System.EventHandler(this.dist0box_TextChanged);
             // 
             // label17
@@ -1426,18 +1445,152 @@
             this.stopbutton.UseVisualStyleBackColor = true;
             this.stopbutton.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
-            // aboutToolStripMenuItem
+            // Hzbox
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.Hzbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Hzbox.FormattingEnabled = true;
+            this.Hzbox.Items.AddRange(new object[] {
+            "1 Hz",
+            "10 Hz",
+            "100 Hz",
+            "1 kHz"});
+            this.Hzbox.Location = new System.Drawing.Point(589, 355);
+            this.Hzbox.Name = "Hzbox";
+            this.Hzbox.Size = new System.Drawing.Size(72, 21);
+            this.Hzbox.TabIndex = 64;
+            this.Hzbox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(586, 339);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(40, 13);
+            this.label32.TabIndex = 73;
+            this.label32.Text = "Sim Hz";
+            // 
+            // decbox
+            // 
+            this.decbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.decbox.FormattingEnabled = true;
+            this.decbox.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"});
+            this.decbox.Location = new System.Drawing.Point(667, 355);
+            this.decbox.Name = "decbox";
+            this.decbox.Size = new System.Drawing.Size(72, 21);
+            this.decbox.TabIndex = 74;
+            this.decbox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(664, 339);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(70, 13);
+            this.label33.TabIndex = 75;
+            this.label33.Text = "# of decimals";
+            // 
+            // pb3box
+            // 
+            this.pb3box.AutoSize = true;
+            this.pb3box.Location = new System.Drawing.Point(583, 558);
+            this.pb3box.Name = "pb3box";
+            this.pb3box.Size = new System.Drawing.Size(15, 14);
+            this.pb3box.TabIndex = 76;
+            this.pb3box.UseVisualStyleBackColor = true;
+            this.pb3box.CheckedChanged += new System.EventHandler(this.pb3box_CheckedChanged);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(576, 542);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(29, 13);
+            this.label34.TabIndex = 77;
+            this.label34.Text = "Hold";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(652, 542);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(29, 13);
+            this.label35.TabIndex = 79;
+            this.label35.Text = "Hold";
+            // 
+            // pb2box
+            // 
+            this.pb2box.AutoSize = true;
+            this.pb2box.Location = new System.Drawing.Point(659, 558);
+            this.pb2box.Name = "pb2box";
+            this.pb2box.Size = new System.Drawing.Size(15, 14);
+            this.pb2box.TabIndex = 78;
+            this.pb2box.UseVisualStyleBackColor = true;
+            this.pb2box.CheckedChanged += new System.EventHandler(this.pb2box_CheckedChanged);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(728, 543);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(29, 13);
+            this.label36.TabIndex = 81;
+            this.label36.Text = "Hold";
+            // 
+            // pb1box
+            // 
+            this.pb1box.AutoSize = true;
+            this.pb1box.Location = new System.Drawing.Point(735, 559);
+            this.pb1box.Name = "pb1box";
+            this.pb1box.Size = new System.Drawing.Size(15, 14);
+            this.pb1box.TabIndex = 80;
+            this.pb1box.UseVisualStyleBackColor = true;
+            this.pb1box.CheckedChanged += new System.EventHandler(this.pb1box_CheckedChanged);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(804, 542);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(29, 13);
+            this.label37.TabIndex = 83;
+            this.label37.Text = "Hold";
+            // 
+            // pb0box
+            // 
+            this.pb0box.AutoSize = true;
+            this.pb0box.Location = new System.Drawing.Point(811, 558);
+            this.pb0box.Name = "pb0box";
+            this.pb0box.Size = new System.Drawing.Size(15, 14);
+            this.pb0box.TabIndex = 82;
+            this.pb0box.UseVisualStyleBackColor = true;
+            this.pb0box.CheckedChanged += new System.EventHandler(this.pb0box_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 591);
+            this.Controls.Add(this.label37);
+            this.Controls.Add(this.pb0box);
+            this.Controls.Add(this.label36);
+            this.Controls.Add(this.pb1box);
+            this.Controls.Add(this.label35);
+            this.Controls.Add(this.pb2box);
+            this.Controls.Add(this.label34);
+            this.Controls.Add(this.pb3box);
+            this.Controls.Add(this.label33);
+            this.Controls.Add(this.decbox);
+            this.Controls.Add(this.label32);
+            this.Controls.Add(this.Hzbox);
             this.Controls.Add(this.stopbutton);
             this.Controls.Add(this.startbutton);
             this.Controls.Add(this.resetbutton);
@@ -1696,6 +1849,18 @@
         private System.Windows.Forms.Button startbutton;
         private System.Windows.Forms.Button stopbutton;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ComboBox Hzbox;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox decbox;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.CheckBox pb3box;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.CheckBox pb2box;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.CheckBox pb1box;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.CheckBox pb0box;
     }
 }
 

@@ -19,12 +19,13 @@ namespace DE2Sim
         private ushort currinstr;
         private System.Collections.Stack ret;
         private bool hasbeenup;
-        private bool hastoggled;
+        private bool hasbeendown;
         private ushort sonarint;
         private ushort sonaren;
         private ushort sonalarm;
         private ushort sonalarmval;
         private ushort[] distances;
+        private ushort decimals;
 
         //displays
         private ushort LEDs;
@@ -69,6 +70,12 @@ namespace DE2Sim
             simtimer = new System.Windows.Forms.Timer();
             simtimer.Interval = 10;
 
+            decimals = 0;
+
+            Hzbox.SelectedIndex = 2;
+
+            decbox.SelectedIndex = 0;
+
             //initialize the sim
             init();
         }
@@ -76,15 +83,12 @@ namespace DE2Sim
         private void init()
         {
             //zero out all values
-            switches = 0;
-            switches1617 = 0;
             LEDs = 0;
             LED1617 = 0;
             XLEDs = 0;
-            PBs = 0x00FF;
             AC = 0;
             hasbeenup = false;
-            hastoggled = false;
+            hasbeendown = false;
 
             //reset odometry values
             xpos = 0;
@@ -383,8 +387,7 @@ namespace DE2Sim
             {
                 sw17.Image = Properties.Resources.sw_down;
                 switches1617 -= mask;
-                if (hasbeenup)
-                    hastoggled = true;
+                hasbeendown = true;
                 return;
             }
             sw17.Image = Properties.Resources.sw_up;
@@ -402,8 +405,11 @@ namespace DE2Sim
 
         private void pb3_MouseUp(object sender, MouseEventArgs e)
         {
-            pb3.Image = Properties.Resources.pb_up;
-            PBs = (ushort)(PBs | 0x0008);
+            if (!pb3box.Checked)
+            {
+                pb3.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0008);
+            }
         }
 
         private void pb2_MouseDown(object sender, MouseEventArgs e)
@@ -414,8 +420,11 @@ namespace DE2Sim
 
         private void pb2_MouseUp(object sender, MouseEventArgs e)
         {
-            pb2.Image = Properties.Resources.pb_up;
-            PBs = (ushort)(PBs | 0x0004);
+            if (!pb2box.Checked)
+            {
+                pb2.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0004);
+            }
         }
 
         private void pb1_MouseDown(object sender, MouseEventArgs e)
@@ -426,8 +435,11 @@ namespace DE2Sim
 
         private void pb1_MouseUp(object sender, MouseEventArgs e)
         {
-            pb1.Image = Properties.Resources.pb_up;
-            PBs = (ushort)(PBs | 0x0002);
+            if (!pb1box.Checked)
+            {
+                pb1.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0002);
+            }
         }
 
         private void pb0_MouseDown(object sender, MouseEventArgs e)
@@ -438,8 +450,11 @@ namespace DE2Sim
 
         private void pb0_MouseUp(object sender, MouseEventArgs e)
         {
-            pb0.Image = Properties.Resources.pb_up;
-            PBs = (ushort)(PBs | 0x0001);
+            if (!pb0box.Checked)
+            {
+                pb0.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0001);
+            }
         }
         #endregion PBs
 
@@ -527,6 +542,9 @@ namespace DE2Sim
         {
             ushort opcode = (ushort)(currinstr & 0xFC00);
             ushort operand = (ushort)(currinstr & 0x03FF);
+            ushort memval = 0;
+            if (codelines.ContainsKey(operand))
+                memval = codelines[operand];
             short signedoperand;
             if ((operand & 0x0200) > 0)
                 signedoperand = (short)(operand | 0xFC00);
@@ -537,16 +555,16 @@ namespace DE2Sim
                 case 0:
                     return;
                 case 0x0400:
-                    AC = (short)codelines[operand];
+                    AC = (short)memval;
                     break;
                 case 0x0800:
                     codelines[operand] = (ushort)AC;
                     break;
                 case 0x0C00:
-                    AC += (short)codelines[operand];
+                    AC += (short)memval;
                     break;
                 case 0x1000:
-                    AC -= (short)codelines[operand];
+                    AC -= (short)memval;
                     break;
                 case 0x1400:
                     PC = operand;
@@ -564,25 +582,30 @@ namespace DE2Sim
                         PC = operand;
                     break;
                 case 0x2400:
-                    AC = (short)(AC & codelines[operand]);
+                    AC = (short)(AC & memval);
                     break;
                 case 0x2800:
-                    AC = (short)(AC | codelines[operand]);
+                    AC = (short)(AC | memval);
                     break;
                 case 0x2C00:
-                    AC = (short)(AC ^ codelines[operand]);
+                    AC = (short)(AC ^ memval);
                     break;
                 case 0x3000:
-                    AC = (short)(AC << signedoperand);
+                    if((operand & 0x0010)>0)
+                        AC = (short)(AC >> (signedoperand & 0x000F));
+                    else
+                        AC = (short)(AC << (signedoperand & 0x000F));
                     break;
                 case 0x3400:
                     AC += signedoperand;
                     break;
                 case 0x3800:
-                    AC = (short)codelines[codelines[operand]];
+                    if(codelines.ContainsKey(memval))
+                        AC = (short)codelines[codelines[operand]];
                     break;
                 case 0x3C00:
-                    codelines[codelines[operand]] = (ushort)AC;
+                    if (codelines.ContainsKey(memval))
+                        codelines[codelines[operand]] = (ushort)AC;
                     break;
                 case 0x4000:
                     ret.Push(PC);
@@ -596,6 +619,15 @@ namespace DE2Sim
                     break;
                 case 0x4C00:
                     Out(operand);
+                    break;
+                case 0x5C00:
+                    AC = signedoperand;
+                    break;
+                case 0x6000:
+                    AC = (short)(((AC * memval) >> decimals) & 0xFFFF);
+                    break;
+                case 0x6400:
+                    AC = (short)(((AC << decimals) / memval) & 0xFFFF);
                     break;
                 default:
                     return;
@@ -663,7 +695,7 @@ namespace DE2Sim
                     break;
                 case 3:
                     ushort result = 0;
-                    if(hastoggled)
+                    if(hasbeendown && hasbeenup)
                     {
                         result = (ushort)(result | (1 << 4));
                     }
@@ -907,7 +939,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[0] = Convert.ToUInt16(dist0box.Text);
+                distances[0] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -923,7 +955,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[1] = Convert.ToUInt16(dist0box.Text);
+                distances[1] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -939,7 +971,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[2] = Convert.ToUInt16(dist0box.Text);
+                distances[2] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -955,7 +987,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[3] = Convert.ToUInt16(dist0box.Text);
+                distances[3] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -971,7 +1003,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[4] = Convert.ToUInt16(dist0box.Text);
+                distances[4] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -987,7 +1019,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[5] = Convert.ToUInt16(dist0box.Text);
+                distances[5] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -1003,7 +1035,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[6] = Convert.ToUInt16(dist0box.Text);
+                distances[6] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -1019,7 +1051,7 @@ namespace DE2Sim
         {
             try
             {
-                distances[7] = Convert.ToUInt16(dist0box.Text);
+                distances[7] = Convert.ToUInt16(dist0box.Text, 16);
             }
             catch
             {
@@ -1089,7 +1121,73 @@ namespace DE2Sim
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is the DE2Sim tool.\nMade by: Luca Farsi\nVersion: 1.0", "About", MessageBoxButtons.OK);
+            MessageBox.Show("This is the DE2Sim tool.\nMade by: Luca Farsi\nVersion: 1.1", "About", MessageBoxButtons.OK);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            simtimer.Interval = (int)(1 * Math.Pow(10, 3-Convert.ToInt32(Hzbox.SelectedIndex)));
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            decimals = Convert.ToUInt16(decbox.SelectedItem);
+        }
+
+        private void pb3box_CheckedChanged(object sender, EventArgs e)
+        {
+            if(pb3box.Checked)
+            {
+                pb3.Image = Properties.Resources.pb_down;
+                PBs = (ushort)(PBs & 0xFFF7);
+            }
+            else
+            {
+                pb3.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0008);
+            }
+        }
+
+        private void pb2box_CheckedChanged(object sender, EventArgs e)
+        {
+            if (pb2box.Checked)
+            {
+                pb2.Image = Properties.Resources.pb_down;
+                PBs = (ushort)(PBs & 0xFFFB);
+            }
+            else
+            {
+                pb2.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0004);
+            }
+        }
+
+        private void pb1box_CheckedChanged(object sender, EventArgs e)
+        {
+            if (pb1box.Checked)
+            {
+                pb1.Image = Properties.Resources.pb_down;
+                PBs = (ushort)(PBs & 0xFFFD);
+            }
+            else
+            {
+                pb1.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0002);
+            }
+        }
+
+        private void pb0box_CheckedChanged(object sender, EventArgs e)
+        {
+            if (pb0box.Checked)
+            {
+                pb0.Image = Properties.Resources.pb_down;
+                PBs = (ushort)(PBs & 0xFFFE);
+            }
+            else
+            {
+                pb0.Image = Properties.Resources.pb_up;
+                PBs = (ushort)(PBs | 0x0001);
+            }
         }
     }
 }
